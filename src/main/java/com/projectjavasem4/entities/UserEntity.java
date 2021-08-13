@@ -11,9 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 
 @Entity
 @Table(name = "users")
+@Data
 public class UserEntity extends BaseEntity {
 
 	@Column(name = "username")
@@ -42,6 +45,8 @@ public class UserEntity extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_role",nullable=false)
+	
+	
 	private RoleEntity role;
 
 	

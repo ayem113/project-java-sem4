@@ -1,13 +1,18 @@
 package com.projectjavasem4.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "permissionDetail")
+@Data
 public class PermissionDetailEntity extends BaseEntity{
 
 	
@@ -18,24 +23,5 @@ public class PermissionDetailEntity extends BaseEntity{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_role",nullable=false)
 	private RoleEntity role;
-
-	public PermissionEntity getPermission() {
-		return permission;
-	}
-
-	public void setPermission(PermissionEntity permission) {
-		this.permission = permission;
-	}
-
-	public RoleEntity getRole() {
-		return role;
-	}
-
-	public void setRole(RoleEntity role) {
-		this.role = role;
-	}
-	
-	
-	
 	
 }

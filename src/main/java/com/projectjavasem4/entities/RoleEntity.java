@@ -8,8 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "role")
+@Data
 public class RoleEntity extends BaseEntity {
 
 	@Column(name = "name")
@@ -24,36 +27,6 @@ public class RoleEntity extends BaseEntity {
 	@OneToMany(mappedBy = "role")
 	private List<PermissionDetailEntity> permissionDetails = new ArrayList<>();
 
-	public String getName() {
-		return name;
-	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public List<UserEntity> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<UserEntity> users) {
-		this.users = users;
-	}
-
-	public List<PermissionDetailEntity> getPermissionDetails() {
-		return permissionDetails;
-	}
-
-	public void setPermissionDetails(List<PermissionDetailEntity> permissionDetails) {
-		this.permissionDetails = permissionDetails;
-	}
 
 }

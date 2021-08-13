@@ -8,8 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "permission")
+@Data
 public class PermissionEntity extends BaseEntity{
 	
 	
@@ -22,30 +25,6 @@ public class PermissionEntity extends BaseEntity{
 	@OneToMany(mappedBy = "permission")
 	private List<PermissionDetailEntity> permissionDetails = new ArrayList<>();
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public List<PermissionDetailEntity> getPermissionDetails() {
-		return permissionDetails;
-	}
-
-	public void setPermissionDetails(List<PermissionDetailEntity> permissionDetails) {
-		this.permissionDetails = permissionDetails;
-	}
-	
 	
 	
 

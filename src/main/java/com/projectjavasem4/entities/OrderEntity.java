@@ -11,8 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "orders")
+@Data
 public class OrderEntity extends BaseEntity{
 
 	@Column(name = "address", columnDefinition = "TEXT")
@@ -37,67 +40,6 @@ public class OrderEntity extends BaseEntity{
 
 
 
-	public String getAddress() {
-		return address;
-	}
-
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-
-	public String getSdt() {
-		return sdt;
-	}
-
-
-	public void setSdt(String sdt) {
-		this.sdt = sdt;
-	}
-
-
-	public Boolean getStt() {
-		return stt;
-	}
-
-
-	public void setStt(Boolean stt) {
-		this.stt = stt;
-	}
-
-
-	public Byte getSale() {
-		return sale;
-	}
-
-
-	public void setSale(Byte sale) {
-		this.sale = sale;
-	}
-
-
-	public UserEntity getUser() {
-		return user;
-	}
-
-
-	public void setUser(UserEntity user) {
-		this.user = user;
-	}
-
-
-	public List<OrderDetailEntity> getOrderDetails() {
-		return orderDetails;
-	}
-
-
-	public void setOrderDetails(List<OrderDetailEntity> orderDetails) {
-		this.orderDetails = orderDetails;
-	}
-
-
-	
 	
 	
 }

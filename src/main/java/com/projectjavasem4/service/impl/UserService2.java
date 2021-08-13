@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.projectjavasem4.dto.UsertDTO2;
 import com.projectjavasem4.entities.UserEntity;
 import com.projectjavasem4.repository.AbtracsRepository2;
+import com.projectjavasem4.repository.UserRepository;
 import com.projectjavasem4.service.IUserService2;
 
 @Service
@@ -21,9 +22,11 @@ public class UserService2 implements IUserService2 {
 	 */
 	
 	@Autowired
-	private JpaRepository<UserEntity, Long> AbRep;
 	
-	 private AbtracsRepository2<UserEntity> AbRep2;
+	private UserRepository AbRep;
+	//private JpaRepository<UserEntity, Long> AbRep;
+	
+	 //private AbtracsRepository2<UserEntity> AbRep2;
 	 
 	
 	/*
@@ -42,7 +45,7 @@ public class UserService2 implements IUserService2 {
 	@Override
 	public List<UsertDTO2> getAll() {
 		List<UsertDTO2> models = new ArrayList<>();
-		List<UserEntity> entities =  AbRep2.findAll();
+		List<UserEntity> entities =  AbRep.findAll();
 		for (UserEntity item : entities) {
 			UsertDTO2 p = new ModelMapper().map(item, UsertDTO2.class);
 			

@@ -7,9 +7,9 @@
             http://www.springframework.org/schema/security
             http://www.springframework.org/schema/security/spring-security-3.2.xsd">
             
-    <http auto-config="false" use-expressions="true" disable-url-rewriting="true">
+    <http auto-config="false" use-expressions="true" disable-url-rewriting="true">	
     
-    	<!-- <intercept-url pattern="/quan-tri/trang-chu" access="hasAnyRole('ADMIN')" />
+    	<intercept-url pattern="/quan-tri/trangchu" access="hasAnyRole('ADMIN')" />
     	
     	<access-denied-handler error-page="/accessDenied" />
         <form-login  login-page="/dang-nhap"
@@ -19,17 +19,17 @@
                      authentication-success-handler-ref="customSuccessHandler"
                      authentication-failure-url="/dang-nhap?incorrectAccount"/>
         <session-management invalid-session-url="/dang-nhap?sessionTimeout"/>
-        <logout delete-cookies="JSESSIONID"/> -->
+        <logout delete-cookies="JSESSIONID"/>
     </http>
     
-   <!--  <authentication-manager >
+    <authentication-manager >
         <authentication-provider user-service-ref="customUserDetailsService">
         		<password-encoder ref="bcryptEncoder"/>
         </authentication-provider>
     </authentication-manager>
     
     <beans:bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
-    <beans:bean id="customUserDetailsService" class="com.laptrinhjavaweb.service.impl.CustomUserDetailsService" />
-    <beans:bean id="customSuccessHandler" class="com.laptrinhjavaweb.security.CustomSuccessHandler" /> -->
+    <beans:bean id="customUserDetailsService" class="com.projectjavasem4.service.impl.CustomUserDetailsService" />
+    <beans:bean id="customSuccessHandler" class="com.projectjavasem4.security.CustomSuccessHandler" />
     
 </beans:beans>

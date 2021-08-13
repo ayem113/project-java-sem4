@@ -8,8 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "province")
+@Data
 public class ProvinceEntity extends BaseEntity {
 	
 	@Column(name = "name")
@@ -21,30 +24,5 @@ public class ProvinceEntity extends BaseEntity {
 	@OneToMany(mappedBy = "province")
 	private List<DistrictEntity> districts = new ArrayList<>();
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public List<DistrictEntity> getDistricts() {
-		return districts;
-	}
-
-	public void setDistricts(List<DistrictEntity> districts) {
-		this.districts = districts;
-	}
 	
-	
-
 }

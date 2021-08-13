@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/projectjavasem4/config/JPAConfig.java=UTF-8
+encoding//src/main/java/com/projectjavasem4/security/CustomSuccessHandler.java=UTF-8
+encoding//src/main/java/com/projectjavasem4/service/impl/CustomUserDetailsService.java=UTF-8
 encoding//src/main/java/com/projectjavasem4/service/impl/ProductService.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/home.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/listUser.jsp=UTF-8
