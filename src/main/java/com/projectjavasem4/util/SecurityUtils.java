@@ -13,7 +13,16 @@ import com.projectjavasem4.dto.MyUser;
 public class SecurityUtils {
 	
 	public static MyUser getPrincipal() {
+		
+		MyUser m = (MyUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		if (m==null) {
+			return null;
+		}
+		else 
+		{
 		return (MyUser) (SecurityContextHolder.getContext()).getAuthentication().getPrincipal();
+		}
     }
 	
 	@SuppressWarnings("unchecked")

@@ -59,6 +59,13 @@
    <!--  <session-config>
         <tracking-mode>COOKIE</tracking-mode>
     </session-config> -->
+    
+    <!-- <jsp-config>
+    <jsp-property-group>
+        <url-pattern>/*</url-pattern>
+        <page-encoding>UTF-8</page-encoding>
+    </jsp-property-group>
+	</jsp-config> -->
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

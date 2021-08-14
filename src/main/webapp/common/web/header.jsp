@@ -1,7 +1,10 @@
 
 <%@include file="/common/taglib.jsp"%>
-<%@ page import="com.projectjavasem4.util.SecurityUtils" %>
+<%@ page import="com.projectjavasem4.util.SecurityUtils"%>
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+	
 
+	
 <header id="header"
 	class="header style-03 header-dark header-transparent">
 	<div class="header-wrap-stick">
@@ -25,53 +28,44 @@
 					<div class="header-control-inner">
 						<div class="meta-dreaming">
 							<ul class="wpml-menu">
-							
-							
-							
-						 
-								<security:authorize access = "isAnonymous()">
-									<li class="menu-item">
-										<div class="wcml-dropdown product wcml_currency_switcher">
-											<ul>
-												<li class="wcml-cs-active-currency"><a
-													class="wcml-cs-item-toggle">USD</a>
-													<ul class="wcml-cs-submenu">
-														<li><a>EUR</a></li>
-													</ul></li>
-											</ul>
-										</div>
-									</li>
-								</security:authorize>
-								
-								<security:authorize access = "isAuthenticated()"> 
-								<li class="menu-item furgan-dropdown block-language">
-								<a
-									href="#" data-furgan="furgan-dropdown"> <img
-										src="/template/web/assets/images/en.png" alt="en" width="18"
-										height="12"> English
-								</a> <span class="toggle-submenu"></span>
-									<ul class="sub-menu">
-										<li class="menu-item"><a href="#"> <img
-												src="assets/images/it.png" alt="it" width="18" height="12">
-												Italiano
-										</a></li>
-									</ul>
-								</li>
-							</security:authorize>
-								
-								
-								<%-- <security:authorize access = "isAnonymous()">
+
+
+									<%--  cách 1 dùng security    <security:authorize access = "isAnonymous()">
+										<a class="nav-link" href="<c:url value='/dang-nhap'/>">Đăng nhập</a>
+										<a class="nav-link" href="<c:url value='/dang-ky'/>">Đăng ký</a>
+									</security:authorize>
+									
+									<security:authorize access = "isAuthenticated()">
+										<a class="nav-link" href="#">Wellcome <%=SecurityUtils.getPrincipal().getFullName()%></a>
+										<a class="nav-link" href="<c:url value='/thoat'/>">Thoát</a>
+									</security:authorize> --%>
+				
+				
+
+
+								<%-- <% if(SecurityUtils.getPrincipal().getFullName()==null || SecurityUtils.getPrincipal().getFullName()==""){ %>
 									<li class="nav-item"><a class="nav-link" href="<c:url value='/dang-nhap'/>">Đăng nhập</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">Đăng ký</a></li>
-								</security:authorize>
-								<security:authorize access = "isAuthenticated()">
-									<li class="nav-item"><a class="nav-link" href="#">Wellcome <%=SecurityUtils.getPrincipal().getFullName()%></a></li>
-									<li class="nav-item"><a class="nav-link" href="<c:url value='/thoat'/>">Thoát</a></li>
-								</security:authorize> --%>
+									<li class="nav-item"><a class="nav-link" href="<c:url value='/dang-ky'/>">Đăng ký</a></li>
+								<% }
+								else{ %>
+									<li class="nav-item"><a class="nav-link" href="#"> <%=SecurityUtils.getPrincipal().getFullName()%></a></li>
+									<li class="nav-item"><a class="nav-link" href="<c:url value='/thoat'/>">Thoát </a></li>
+								<%} %> --%>
 								
+								<!-- dùng cách cũ -->
 								
-								
-								
+								<% if(SecurityUtils.getPermission().size()>1 ){ %>
+									<li class="nav-item"><a class="nav-link" href="#"> <%=SecurityUtils.getPrincipal().getFullName()%></a></li>
+									<li class="nav-item"><a class="nav-link" href="<c:url value='/thoat'/>">Thoát </a></li>
+								<% }
+								else{ %>
+									<li class="nav-item"><a class="nav-link" href="<c:url value='/dang-nhap'/>">Đăng nhập </a></li>
+									<li class="nav-item"><a class="nav-link" href="<c:url value='/dang-ky'/>">Đăng ký</a></li>
+								<%} %>
+
+									
+
+
 							</ul>
 							<div class="header-search furgan-dropdown">
 								<div class="header-search-inner" data-furgan="furgan-dropdown">
@@ -259,11 +253,11 @@
 						English
 				</a> <span class="toggle-submenu"></span>
 					<ul class="sub-menu">
-						<li class="menu-item">
-						<a href="#"> <img src="assets/images/it.png" alt="it" width="18" height="12"> Italiano </a>
-						</li>
-					</ul>
-				</li>
+						<li class="menu-item"><a href="#"> <img
+								src="assets/images/it.png" alt="it" width="18" height="12">
+								Italiano
+						</a></li>
+					</ul></li>
 				<li class="menu-item">
 					<div class="wcml-dropdown product wcml_currency_switcher">
 						<ul>
@@ -275,8 +269,8 @@
 						</ul>
 					</div>
 				</li>
-				
-				
+
+
 			</ul>
 		</div>
 		<div class="header-mobile-mid">

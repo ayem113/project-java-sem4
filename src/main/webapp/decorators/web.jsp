@@ -1,9 +1,12 @@
 <%@ include file="/common/taglib.jsp" %>
+
 <!DOCTYPE html>
-<html lang="en">
+<html >
 
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="utf-8"/>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png"/>
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,600,600i,700,700i&amp;display=swap" rel="stylesheet">
@@ -51,26 +54,6 @@
 
 
 
-
-
-<!-- <script src="/template/web/assets/js/jquery-1.12.4.min.js"></script>
-<script src="/template/web/assets/js/bootstrap.min.js"></script>
-<script src="/template/web/assets/js/chosen.min.js"></script>
-<script src="/template/web/assets/js/countdown.min.js"></script>
-<script src="/template/web/assets/js/jquery.scrollbar.min.js"></script>
-<script src="/template/web/assets/js/lightbox.min.js"></script>
-<script src="/template/web/assets/js/magnific-popup.min.js"></script>
-<script src="/template/web/assets/js/slick.js"></script>
-<script src="/template/web/assets/js/jquery.zoom.min.js"></script>
-<script src="/template/web/assets/js/threesixty.min.js"></script>
-<script src="/template/web/assets/js/jquery-ui.min.js"></script>
-<script src="/template/web/assets/js/mobilemenu.js"></script>
-<script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script>
-<script src="/template/web/assets/js/functions.js"></script> -->
-
-
-
-
 <script src="<c:url value='/template/web/assets/js/jquery-1.12.4.min.js'/>"></script>
 <script src="<c:url value='/template/web/assets/js/bootstrap.min.js'/>"></script>
 <script src="<c:url value='/template/web/assets/js/chosen.min.js'/>"></script>
@@ -85,10 +68,6 @@
 <script src="<c:url value='/template/web/assets/js/mobilemenu.js'/>"></script>
 <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script>
 <script src="<c:url value='/template/web/assets/js/functions.js'/>"></script>
-
-
-
-
 
 
 </body>
