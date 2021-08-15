@@ -2,7 +2,39 @@
 	<%@include file="/common/taglib.jsp"%>
 
 	
+<script type="text/javascript">
 
+
+
+	
+console.log(${alert});
+
+	if (${alert}!=null) {
+		
+		if (${alert}==true) {
+			Swal.fire({
+				  position: 'top',
+				  icon: 'success',
+				  title: 'dang ky thanh cong',
+				  showConfirmButton: false,
+				  timer: 1500
+				});
+				
+			
+		}
+		else{
+			Swal.fire({
+				  position: 'top',
+				  icon: 'error',
+				  title: 'dang ky khong thanh cong',
+				  showConfirmButton: false,
+				  timer: 1500
+				});
+				
+			}
+		
+	}
+</script>
 
     <div class="container">
 
@@ -16,34 +48,50 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form class="user">
+                            
+                            
+                            <form:form action="xu-ly-dang-ky" modelAttribute="s" method="post" >
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="First Name">
+                                        <input type="text" class="form-control form-control-user" name="username"
+                                            placeholder="User Name" required="true">
+                                            
+                                         <%-- <form:input  path="username" />  --%>  
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Last Name">
+                                        <input type="text" class="form-control form-control-user" name="password"
+                                            placeholder="Password"required="true">
+                                           <%--  <form:input  path="password" />   --%>
                                     </div>
+                                </div>
+                                
+                                <!-- <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" class="form-control form-control-user"
+                                            name="exampleInputPassword" placeholder="Password">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control form-control-user"
+                                            name="exampleRepeatPassword" placeholder="Repeat Password">
+                                    </div>
+                                </div> -->
+                                
+                                
+                                
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" name="fullname"
+                                        placeholder="fullname"required="true">
+                                      <%--   <form:input  path="fullname" />   --%>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address">
+                                    <input type="text" class="form-control form-control-user" name="address"
+                                        placeholder="address"required="true">
+                                       <%--  <form:input  path="address" /> --%>  
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password">
-                                    </div>
-                                </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
+                                <input class="btn btn-primary btn-user btn-block" type="submit" value="Register Account"/>
+                                <%-- <a href="<c:url value='/xu-ly-dang-ky'/>" class="btn btn-primary btn-user btn-block">
                                     Register Account
-                                </a>
+                                </a> --%>
                                 <hr>
                                 <a href="index.html" class="btn btn-google btn-user btn-block">
                                     <i class="fab fa-google fa-fw"></i> Register with Google
@@ -51,7 +99,9 @@
                                 <a href="index.html" class="btn btn-facebook btn-user btn-block">
                                     <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
                                 </a>
-                            </form>
+                            </form:form>
+                            
+                            
                             <hr>
                             <div class="text-center">
                                 <a class="small" href="forgot-password.html">Forgot Password?</a>

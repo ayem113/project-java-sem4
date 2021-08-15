@@ -5,4 +5,7 @@ import com.projectjavasem4.entities.BaseEntity;
 
 //@NoRepositoryBean
 
-public interface GenericRepository<T extends BaseEntity> extends JpaRepository<T, Long> {}
+public interface GenericRepository<T extends BaseEntity> extends JpaRepository<T, Long> {
+	
+	
+}

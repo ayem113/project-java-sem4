@@ -18,7 +18,7 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Chào mừng trở lại!!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Wellcome back!!</h1>
                                     </div>
                                     
                                     
@@ -48,11 +48,11 @@
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">ghi nhớ</label>
+                                                <label class="custom-control-label" for="customCheck">remember</label>
                                             </div>
                                         </div>
                                        
-                                        <button type="submit" class="btn btn-primary btn-user btn-block" >Đăng nhập</button>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block" >Login</button>
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google

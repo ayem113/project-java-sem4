@@ -22,6 +22,7 @@
 
     <!-- Custom styles for this template-->
     <link href="<c:url  value='/template/admin/css/sb-admin-2.min.css'/>" rel="stylesheet">
+ <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
  
  

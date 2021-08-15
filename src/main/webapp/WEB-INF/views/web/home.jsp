@@ -5,6 +5,19 @@
 
 
 
+<script type="text/javascript">
+
+	if (${alert}!=null) {
+		
+		if (${alert}=="true") {
+			alert("dang ky thanh cong");
+		}
+		else{alert("dang ky khong thanh cong");}
+		
+	}
+</script>
+
+
 <div class="fullwidth-template">
     <div class="slide-home-03">
         <div class="response-product product-list-owl owl-slick equal-container better-height"

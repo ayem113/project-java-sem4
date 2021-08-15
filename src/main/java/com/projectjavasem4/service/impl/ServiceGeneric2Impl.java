@@ -33,4 +33,5 @@ public class ServiceGeneric2Impl <T extends BaseEntity, D extends AbstractDTO<T>
 		return null;
 	}
 
+	
 }
