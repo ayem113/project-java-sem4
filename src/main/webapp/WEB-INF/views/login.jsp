@@ -40,6 +40,7 @@
                                             <input type="text" class="form-control form-control-user"
                                                 id="exampleInputEmail" name="j_username" aria-describedby="emailHelp"
                                                 placeholder="Nhập tài khoản...">
+                                            <input type="hidden" name="returnUrl" value="${returnUrl}"/>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
@@ -80,7 +81,6 @@
         </div>
 
 	
-
 
 
 

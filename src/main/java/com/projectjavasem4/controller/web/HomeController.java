@@ -1,10 +1,6 @@
 package com.projectjavasem4.controller.web;
-
-
-
-import java.math.BigInteger;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,20 +10,17 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.projectjavasem4.entities.RoleEntity;
 import com.projectjavasem4.entities.UserEntity;
 import com.projectjavasem4.service.IRoleService;
 import com.projectjavasem4.service.IUserService2;
-import com.projectjavasem4.service.impl.RoleService;
 import com.projectjavasem4.util.SecurityUtils;
 @Controller(value = "homeControllerOfWeb")
 
@@ -41,24 +34,61 @@ public class HomeController {
    @RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
    public ModelAndView homePage(HttpServletRequest request) {
       ModelAndView mav = new ModelAndView("web/home");
-      mav.addObject("alert", request.getParameter("alert"));
+      mav.addObject("isLogin", request.getParameter("isLogin"));
       return mav;
    }
+   
+   public boolean isLogin() {
+	  
+	   return SecurityUtils.getPermission().size()>1;
+	
+}
    @RequestMapping(value = "/dang-nhap", method = RequestMethod.GET)
-	public ModelAndView loginPage() {
+   public ModelAndView loginPage(HttpServletRequest request,@RequestParam(name = "returnUrl",required = false)String returnUrl) {
 	   ModelAndView mav = new ModelAndView("login");
+	   mav.addObject("returnUrl", request.getParameter("returnUrl"));
+	   // c2 mav.addObject("returnUrl", returnUrl);
 	   
 	   
-	   // để ngăn người dùng quay lại trang đăng nhập nếu họ đã đăng nhập
-	   Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	   return mav;
+	// để tb ban da dang nhap roi  nếu họ  đăng nhập tiep
+	   
+	   
+	   //String role=SecurityUtils.getPrincipal().getFullName();
+	   //String role2=SecurityUtils.getPrincipal().getRole();
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   if (isLogin()) {
+		   return new ModelAndView("redirect:/trang-chu?isLogin=true");
+	   	}
+	   
+	   
+	   
+	   
+	   
+	   
 		/*
-		 * if ( authentication == null || authentication instanceof
-		 * AnonymousAuthenticationToken ) { return mav; }
+		 * Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		 * if ( authentication.getPrincipal()!="anonymousUser" ||
+		 * authentication.getAuthorities().size()<1 || authentication instanceof
+		 * AnonymousAuthenticationToken ) {
 		 * 
-		 * return new ModelAndView("redirect:/trang-chu");
+		 * return new ModelAndView("redirect:/trang-chu?isLogin=true"); }
 		 */
+	   
+	   return mav;
+	   
+	   
+	   
+	   
 	}
+   
+   
+   
    @RequestMapping(value = "/thoat", method = RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -73,33 +103,40 @@ public class HomeController {
 		return new ModelAndView("redirect:/dang-nhap?accessDenied");
 	}
 	
-	@RequestMapping(value = "/thanh-toan", method = RequestMethod.GET)
+	@RequestMapping(value = "/xu-ly-thanh-toan", method = RequestMethod.GET)
 	public ModelAndView payment(HttpServletRequest request, HttpServletResponse response) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
 		
-		if (auth.isAuthenticated()) {
+		if (isLogin()==false) {
 			
 			return  new ModelAndView("redirect:/dang-nhap?returnUrl=thanh-toan");
 			
 		}
 		else {
-			return new ModelAndView("web/home");
+			//xử lý code thanh toán ở đây
+			return new ModelAndView( "redirect:/trang-chu?isCheckout=true");
 		}
 		
 	}
 	
 	
+	@RequestMapping(value = "/thanh-toan", method = RequestMethod.GET)
+	public ModelAndView payment2(HttpServletRequest request, HttpServletResponse response) {
+		
+			return new ModelAndView("web/checkout");
+		}
+		
+	
 	
 	@RequestMapping(value = "/dang-ky", method = RequestMethod.GET)
-	   public ModelAndView Register(HttpServletRequest request) {
+	public ModelAndView Register(HttpServletRequest request) {
 		
 	      ModelAndView mav = new ModelAndView("register");
 	      mav.addObject("alert", request.getParameter("alert"));
 	      //mav.addObject("s", new UserEntity());
 	      return mav;
 	   }
-	
 	
 	@RequestMapping(value = "/xu-ly-dang-ky", method = RequestMethod.POST)
     public String doRegister( HttpServletRequest request, @ModelAttribute("s") UserEntity user /*BindingResult bindingResult*/) throws NoSuchAlgorithmException {

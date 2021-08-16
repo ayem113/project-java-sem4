@@ -1,3 +1,4 @@
+<%@include file="/common/taglib.jsp"%>
 <div class="banner-wrapper has_background">
     <img src="assets/images/banner-for-all2.jpg"
          class="img-responsive attachment-1920x447 size-1920x447" alt="img">
@@ -515,6 +516,10 @@
                                         <button type="submit" class="button alt" name="furgan_checkout_place_order"
                                                 id="place_order" value="Place order" data-value="Place order">Place
                                             order
+                                            
+                                            <a class="nav-link" href="<c:url value='/xu-ly-thanh-toan'/>">Place
+                                            order</a>
+                                            
                                         </button>
                                         <input type="hidden" id="furgan-process-checkout-nonce"
                                                name="furgan-process-checkout-nonce" value="634590c981"><input

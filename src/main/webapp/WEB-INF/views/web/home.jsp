@@ -1,20 +1,25 @@
 
-
-
 <body>
-
-
 
 <script type="text/javascript">
 
-	if (${alert}!=null) {
-		
-		if (${alert}=="true") {
-			alert("dang ky thanh cong");
-		}
-		else{alert("dang ky khong thanh cong");}
+console.log(${isLogin});
+
+
+	
+	if (${isLogin}!=null) {
+		Swal.fire({
+			  position: 'top',
+			  icon: 'success',
+			  title: 'ban da dang nhap ',
+			  showConfirmButton: false,
+			  timer: 1500
+			});
+			
 		
 	}
+		
+	
 </script>
 
 
