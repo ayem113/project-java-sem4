@@ -5179,8 +5179,7 @@ body #widget-area .select2-container--default .select2-selection--single {
 	color: #000;
 }
 .comments-pagination,
-.post-pagination,
-.pagination {
+.post-pagination {
 	display: inline-block;
 	width: 100%;
 }

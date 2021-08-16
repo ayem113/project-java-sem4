@@ -1,26 +1,7 @@
 
 <body>
 
-<script type="text/javascript">
 
-console.log(${isLogin});
-
-
-	
-	if (${isLogin}!=null) {
-		Swal.fire({
-			  position: 'top',
-			  icon: 'success',
-			  title: 'ban da dang nhap ',
-			  showConfirmButton: false,
-			  timer: 1500
-			});
-			
-		
-	}
-		
-	
-</script>
 
 
 <div class="fullwidth-template">
@@ -451,9 +432,25 @@ console.log(${isLogin});
                     </div>
                 </div>
                 <!-- OWL Products -->
+                
+                
+                
+                <!-- phan trang -->
+                
+                <ul class="pagination" id="pagination"></ul>	
+				<input type="hidden" value="" id="page" name="page"/>
+				<input type="hidden" value="" id="limit" name="limit"/>	
+				<!-- phan trang -->
+				
+				
+				
+				
+				
+                
                 <div class="shop-all">
                     <a target=" _blank" href="#">Discovery All</a>
                 </div>
+                	
             </div>
         </div>
     </div>
@@ -881,6 +878,49 @@ console.log(${isLogin});
 </div>
 
 
+<script type="text/javascript">
+
+if (${isLogin}!=null) {
+	
+	if(${isLogin}==true){
+		
+		Swal.fire({
+			  position: 'top',
+			  icon: 'success',
+			  title: 'ban da dang nhap ',
+			  showConfirmButton: false,
+			  timer: 1500
+			});
+		
+	}
+	
+	
+		
+	
+}
+
+$('#pagination').twbsPagination({
+    totalPages: 35,
+    visiblePages: 7,
+    onPageClick: function (event, page) {
+        $('#page-content').text('Page ' + page);
+    }
+});
+
+
+
+
+	
+	
+		
+	
+</script>
+
 
 </body>
 </html>
+
+
+
+
+

@@ -27,8 +27,23 @@
     <link href="<c:url value='/template/web/assets/css/dreaming-attribute.css'/>" rel="stylesheet" type="text/css">
     <link href="<c:url value='/template/web/assets/css/style.css'/>" rel="stylesheet" type="text/css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
     
-    
+    <script src="<c:url value='/template/web/assets/js/jquery-1.12.4.min.js'/>"></script>
+<script src="<c:url value='/template/web/assets/js/bootstrap.min.js'/>"></script>
+<script src="<c:url value='/template/web/assets/js/chosen.min.js'/>"></script>
+<script src="<c:url value='/template/web/assets/js/countdown.min.js'/>"></script>
+<script src="<c:url value='/template/web/assets/js/jquery.scrollbar.min.js'/>"></script>
+<script src="<c:url value='/template/web/assets/js/lightbox.min.js'/>"></script>
+<script src="<c:url value='/template/web/assets/js/magnific-popup.min.js'/>"></script>
+<script src="<c:url value='/template/web/assets/js/slick.js'/>"></script>
+<script src="<c:url value='/template/web/assets/js/jquery.zoom.min.js'/>"></script>
+<script src="<c:url value='/template/web/assets/js/threesixty.min.js'/>"></script>
+<script src="<c:url value='/template/web/assets/js/jquery-ui.min.js'/>"></script>
+<script src="<c:url value='/template/web/assets/js/mobilemenu.js'/>"></script>
+<script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script>
+<script src="<c:url value='/template/web/assets/js/functions.js'/>"></script>
+<script src="<c:url value='/template/web/paging/jquery.twbsPagination.js' />"></script>
     
     <title>Furgan - HTML Template </title>
 </head>
@@ -54,20 +69,7 @@
 
 
 
-<script src="<c:url value='/template/web/assets/js/jquery-1.12.4.min.js'/>"></script>
-<script src="<c:url value='/template/web/assets/js/bootstrap.min.js'/>"></script>
-<script src="<c:url value='/template/web/assets/js/chosen.min.js'/>"></script>
-<script src="<c:url value='/template/web/assets/js/countdown.min.js'/>"></script>
-<script src="<c:url value='/template/web/assets/js/jquery.scrollbar.min.js'/>"></script>
-<script src="<c:url value='/template/web/assets/js/lightbox.min.js'/>"></script>
-<script src="<c:url value='/template/web/assets/js/magnific-popup.min.js'/>"></script>
-<script src="<c:url value='/template/web/assets/js/slick.js'/>"></script>
-<script src="<c:url value='/template/web/assets/js/jquery.zoom.min.js'/>"></script>
-<script src="<c:url value='/template/web/assets/js/threesixty.min.js'/>"></script>
-<script src="<c:url value='/template/web/assets/js/jquery-ui.min.js'/>"></script>
-<script src="<c:url value='/template/web/assets/js/mobilemenu.js'/>"></script>
-<script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script>
-<script src="<c:url value='/template/web/assets/js/functions.js'/>"></script>
+
 
 
 </body>
