@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,12 +49,12 @@ public class HomeController {
 	   }
 	   
 	   
-	   
-	public ModelAndView showList(@RequestParam("page") int page, @RequestParam("limit") int limit,HttpServletRequest request) {
+	   @RequestMapping(value = "/trang-chu2", method = RequestMethod.GET)
+	public ModelAndView showList(@RequestParam(name = "isLogin",required = false)String isLogin,@RequestParam("page") int page, @RequestParam("limit") int limit,HttpServletRequest request) {
 		ProductDTO model = new ProductDTO();
 		model.setPage(page);
 		model.setLimit(limit);
-		ModelAndView mav = new ModelAndView("admin/new/list");
+		ModelAndView mav = new ModelAndView("web/home2");
 		Pageable pageable = new PageRequest(page - 1, limit);
 		model.setListResult(iPro.findAll(pageable));
 		model.setTotalItem(iPro.getTotalItem());
@@ -64,15 +65,23 @@ public class HomeController {
 			//mav.addObject("message", message.get("message"));
 			//mav.addObject("alert", message.get("alert"));
 			//}
-		
+		if (isLogin!=null) {
+	    	 mav.addObject("isLogin", isLogin);
+		} 
+	     else { mav.addObject("isLogin", "false");}
 		return mav.addObject("model", model);
 	}
 	
 	
 	
    @RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
-   public ModelAndView homePage(HttpServletRequest request,@RequestParam(name = "isLogin",required = false)String isLogin) {
+   public ModelAndView homePage(Model model,HttpServletRequest request,@RequestParam(name = "isLogin",required = false)String isLogin) {
       ModelAndView mav = new ModelAndView("web/home");
+      
+      
+      mav.addObject("model", iPro.getAll());
+     // model.addAttribute("list", iPro.getAll());
+     
      if (isLogin!=null) {
     	 mav.addObject("isLogin", isLogin);
 	} 

@@ -138,10 +138,12 @@
             </div>
             <div class="furgan-products style-04">
             
+            <form action="<c:url value='/trang-chu2'/>" id="formSubmit" method="get">
+            
             
                 <div class="response-product product-list-grid row auto-clear equal-container better-height ">
                 
-                <c:forEach var="item" items="${model}">
+                <c:forEach var="item" items="${model.listResult}">
                 
                 	
                 			<div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-25 product type-product status-publish has-post-thumbnail product_cat-light product_cat-chair product_cat-specials product_tag-light product_tag-sock first instock sale featured shipping-taxable purchasable product-type-simple">
@@ -242,7 +244,7 @@
                                 </a>
                                 <div class="flash">
                                     <span class="onnew"><span class="text">New</span></span></div>
-                                <form class="variations_form cart">
+                                <form  id="xx" class="variations_form cart">
                                     <table class="variations">
                                         <tbody>
                                         <tr>
@@ -409,7 +411,7 @@
                                 </a>
                                 <div class="flash">
                                     <span class="onnew"><span class="text">New</span></span></div>
-                                <form class="variations_form cart">
+                                <form id="xxx"class="variations_form cart">
                                     <table class="variations">
                                         <tbody>
                                         <tr>
@@ -494,14 +496,11 @@
 				<input type="hidden" value="" id="limit" name="limit"/>	
 				<!-- phan trang -->
 				
-				
-				
-				
-				
-                
                 <div class="shop-all">
                     <a target=" _blank" href="#">Discovery All</a>
                 </div>
+              </form>
+              
                 	
             </div>
         </div>
@@ -954,20 +953,19 @@ if (${isLogin}!=null) {
 	
 }
 
+var totalPages = ${model.totalPage};
+var currentPage = ${model.page};
 
-
-<%-- var totalPages = ${model.totalPage};
-var currentPage = ${model.page}; --%>
 
 $('#pagination').twbsPagination({
-	totalPages: 50,
-    visiblePages: 7,
-    startPage: 2,
+	totalPages: totalPages,
+    visiblePages: 10,
+    startPage: currentPage,
     onPageClick: function (event, page) {
     	if (currentPage != page) {
-    		$('#limit').val(5);
+    		$('#limit').val(2);
 			$('#page').val(page);
-			//$('#formSubmit').submit();
+			$('#formSubmit').submit();
 		}
     }
 }); 
