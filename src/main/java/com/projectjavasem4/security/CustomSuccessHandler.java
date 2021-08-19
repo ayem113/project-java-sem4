@@ -56,7 +56,7 @@ public class CustomSuccessHandler extends SavedRequestAwareAuthenticationSuccess
 			url = "/quan-tri/trangchu";
 			
 		} else if (role.equals("USER")) {
-			url = "/trang-chu";
+			url = "/trang-chu?page=1&limit=5";
 		}
 		return url;
 	}

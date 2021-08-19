@@ -1,7 +1,9 @@
 package com.projectjavasem4.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +75,16 @@ public class CategoryService implements ICategoryService {
 	public void deleteById(long id) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Map<String, String> findAll() {
+		Map<String, String> result = new HashMap<>();
+		List<CategoryEntity> entities = CatRep.findAll();
+		for (CategoryEntity item: entities) {
+			result.put(item.getCode(), item.getName());
+		}
+		return result;
 	}
 
 }

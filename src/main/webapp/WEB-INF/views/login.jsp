@@ -67,7 +67,7 @@
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                    <li class="nav-item"><a class="nav-link" href="<c:url value='/dang-ky'/>">Create an Account!</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="dang-ky">Create an Account!</a></li>
                                     </div>
                                 </div>
                             </div>

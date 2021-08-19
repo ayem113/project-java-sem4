@@ -1,6 +1,7 @@
 package com.projectjavasem4.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Pageable;
 
@@ -14,5 +15,5 @@ public interface ICategoryService   {
 	void delete(long[] ids);
 	void deleteById(long id);
 	
-	
+	Map<String, String> findAll();
 }

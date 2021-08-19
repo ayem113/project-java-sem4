@@ -26,7 +26,7 @@ public class ProductDTO extends AbstractDTO<ProductDTO> {
 	
 	private Long id_category;
 	
-	
+	private String categoryCode;
 	private  Long id_orderDetails ;
 	
 	private Long id_comments;

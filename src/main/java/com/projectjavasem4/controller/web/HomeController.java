@@ -49,12 +49,13 @@ public class HomeController {
 	   }
 	   
 	   
-	   @RequestMapping(value = "/trang-chu2", method = RequestMethod.GET)
+	   @RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
 	public ModelAndView showList(@RequestParam(name = "isLogin",required = false)String isLogin,@RequestParam("page") int page, @RequestParam("limit") int limit,HttpServletRequest request) {
+		   ModelAndView mav = new ModelAndView("web/home");
+		   
 		ProductDTO model = new ProductDTO();
 		model.setPage(page);
 		model.setLimit(limit);
-		ModelAndView mav = new ModelAndView("web/home2");
 		Pageable pageable = new PageRequest(page - 1, limit);
 		model.setListResult(iPro.findAll(pageable));
 		model.setTotalItem(iPro.getTotalItem());
@@ -74,7 +75,7 @@ public class HomeController {
 	
 	
 	
-   @RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
+   /*@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
    public ModelAndView homePage(Model model,HttpServletRequest request,@RequestParam(name = "isLogin",required = false)String isLogin) {
       ModelAndView mav = new ModelAndView("web/home");
       
@@ -87,7 +88,7 @@ public class HomeController {
 	} 
      else { mav.addObject("isLogin", "false");}
       return mav;
-   }
+   }*/
    
    
    

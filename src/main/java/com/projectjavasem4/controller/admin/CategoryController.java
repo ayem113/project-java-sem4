@@ -15,7 +15,7 @@ public class CategoryController {
 	
 	@RequestMapping(value = "/quan-tri/danh-muc/danh-sach", method = RequestMethod.GET)
 	public ModelAndView list() {
-		return new ModelAndView("admin/listCategory").addObject("List", newService.getAll());
+		return new ModelAndView("admin/category/listCategory").addObject("List", newService.getAll());
 	}
 	
 	

@@ -15,7 +15,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/quan-tri/nguoi-dung/danh-sach", method = RequestMethod.GET)
 	public ModelAndView list() {
-		return new ModelAndView("admin/listUser").addObject("List", newService.getAll());
+		return new ModelAndView("admin/user/listUser").addObject("List", newService.getAll());
 	}
 	
 	

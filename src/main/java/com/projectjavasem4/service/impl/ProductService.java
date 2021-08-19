@@ -10,10 +10,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.projectjavasem4.dto.ProductDTO;
+import com.projectjavasem4.entities.CategoryEntity;
 import com.projectjavasem4.entities.ProductEntity;
 import com.projectjavasem4.repository.CategoryRepository;
 import com.projectjavasem4.repository.GenericRepository;
-import com.projectjavasem4.repository.ProductRepository;
 import com.projectjavasem4.service.IProductService;
 
 @Service
@@ -26,7 +26,6 @@ public class ProductService implements IProductService {
 
 	@Override
 	public List<ProductDTO> findAll(Pageable pageable) {
-
 
 		List<ProductDTO> models = new ArrayList<>();
 		List<ProductEntity> entities = proRep.findAll(pageable).getContent();
@@ -47,14 +46,36 @@ public class ProductService implements IProductService {
 	public ProductDTO findById(long id) {
 
 		ProductEntity pro = proRep.findOne(id);
-
-		return new ModelMapper().map(pro, ProductDTO.class);
+		Long id2 = pro.getCategory().getId();
+		
+		
+		ProductDTO dto= new ProductDTO();
+		 
+		BeanUtils.copyProperties(pro, dto);  //c1 dung BeanUtils
+		// dto =new ModelMapper().map(pro, ProductDTO.class);  cach 2 dung ModelMapper
+		dto.setId_category(id2);
+		return dto; 
+		
 
 		// proRep.getOne(id);
 	}
 
 	@Override
-	public ProductDTO save(ProductDTO dto) {
+	public boolean save(ProductDTO dto) {
+
+		try {
+			CategoryEntity c = CatRep.findOne(dto.getId_category()); 
+			  ProductEntity p = new ProductEntity(); 
+			  p.setCategory(c);
+			  
+			  BeanUtils.copyProperties(dto, p);
+			  proRep.save(p);
+			   //new ModelMapper().map(proRep.save(p), ProductDTO.class);
+			 
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 
 		/*
 		 * ProductEntity pro = new ModelMapper().map(dto, ProductEntity.class);
@@ -62,11 +83,6 @@ public class ProductService implements IProductService {
 		 * ProductEntity t = proRep.save(pro); ProductDTO p = new ModelMapper().map(t,
 		 * ProductDTO.class); p.setId_category(c.getId());
 		 */
-
-		ProductEntity kq = new ProductEntity();
-		BeanUtils.copyProperties(dto, kq);
-
-		return new ModelMapper().map(kq, ProductDTO.class);
 
 //		try {
 //			ProductEntity e = new ProductEntity();

@@ -244,48 +244,8 @@
                                 </a>
                                 <div class="flash">
                                     <span class="onnew"><span class="text">New</span></span></div>
-                                <form  id="xx" class="variations_form cart">
-                                    <table class="variations">
-                                        <tbody>
-                                        <tr>
-                                            <td class="value">
-                                                <select title="box_style" data-attributetype="box_style"
-                                                        data-id="pa_color"
-                                                        class="attribute-select " name="attribute_pa_color"
-                                                        data-attribute_name="attribute_pa_color"
-                                                        data-show_option_none="yes">
-                                                    <option data-type="" data-pa_color="" value="">Choose an
-                                                        option
-                                                    </option>
-                                                    <option data-width="30" data-height="30" data-type="color"
-                                                            data-pa_color="#ff63cb" value="pink"
-                                                            class="attached enabled">Pink
-                                                    </option>
-                                                    <option data-width="30" data-height="30" data-type="color"
-                                                            data-pa_color="#a825ea" value="purple"
-                                                            class="attached enabled">Purple
-                                                    </option>
-                                                    <option data-width="30" data-height="30" data-type="color"
-                                                            data-pa_color="#db2b00" value="red"
-                                                            class="attached enabled">Red
-                                                    </option>
-                                                </select>
-                                                <div class="data-val attribute-pa_color"
-                                                     data-attributetype="box_style"><a class="change-value color"
-                                                                                       href="#"
-                                                                                       style="background: #ff63cb;"
-                                                                                       data-value="pink"></a><a
-                                                        class="change-value color" href="#"
-                                                        style="background: #a825ea;" data-value="purple"></a><a
-                                                        class="change-value color" href="#"
-                                                        style="background: #db2b00;" data-value="red"></a></div>
-                                                <a class="reset_variations" href="#"
-                                                   style="visibility: hidden;">Clear</a>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </form>
+                                
+                                
                                 <div class="group-button">
                                     <div class="add-to-cart">
                                         <a href="#"
@@ -411,48 +371,12 @@
                                 </a>
                                 <div class="flash">
                                     <span class="onnew"><span class="text">New</span></span></div>
-                                <form id="xxx"class="variations_form cart">
-                                    <table class="variations">
-                                        <tbody>
-                                        <tr>
-                                            <td class="value">
-                                                <select title="box_style" data-attributetype="box_style"
-                                                        data-id="pa_color"
-                                                        class="attribute-select " name="attribute_pa_color"
-                                                        data-attribute_name="attribute_pa_color"
-                                                        data-show_option_none="yes">
-                                                    <option data-type="" data-pa_color="" value="">Choose an
-                                                        option
-                                                    </option>
-                                                    <option data-width="30" data-height="30" data-type="color"
-                                                            data-pa_color="#3155e2" value="blue"
-                                                            class="attached enabled">Blue
-                                                    </option>
-                                                    <option data-width="30" data-height="30" data-type="color"
-                                                            data-pa_color="#49aa51" value="green"
-                                                            class="attached enabled">Green
-                                                    </option>
-                                                    <option data-width="30" data-height="30" data-type="color"
-                                                            data-pa_color="#ff63cb" value="pink"
-                                                            class="attached enabled">Pink
-                                                    </option>
-                                                </select>
-                                                <div class="data-val attribute-pa_color"
-                                                     data-attributetype="box_style"><a class="change-value color"
-                                                                                       href="#"
-                                                                                       style="background: #3155e2;"
-                                                                                       data-value="blue"></a><a
-                                                        class="change-value color" href="#"
-                                                        style="background: #49aa51;" data-value="green"></a><a
-                                                        class="change-value color" href="#"
-                                                        style="background: #ff63cb;" data-value="pink"></a></div>
-                                                <a class="reset_variations" href="#"
-                                                   style="visibility: hidden;">Clear</a>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </form>
+                           
+                           
+                           
+                           
+                           
+                           
                                 <div class="group-button">
                                     <div class="add-to-cart">
                                         <a href="#"
@@ -963,7 +887,7 @@ $('#pagination').twbsPagination({
     startPage: currentPage,
     onPageClick: function (event, page) {
     	if (currentPage != page) {
-    		$('#limit').val(2);
+    		$('#limit').val(10);
 			$('#page').val(page);
 			$('#formSubmit').submit();
 		}
