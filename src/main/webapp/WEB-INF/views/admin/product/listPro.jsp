@@ -1,3 +1,5 @@
+
+  
 <%@include file="/common/taglib.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -15,7 +17,7 @@
 				<div class="modal-header">
 
 
-					<h4 class="modal-title" id="xxx">Thêm mới sản phẩm</h4>
+					<h4 class="modal-title" id="myModalLabel">Thêm mới sản phẩm</h4>
 
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
@@ -71,7 +73,6 @@
 						</div>
 					</div>
 
-
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
@@ -80,17 +81,11 @@
 						</div>
 					</div>
 
-					<button type="submit" id="btnAddOrUpdate"
-						class="btn btn-info btn-fill pull-right">Thêm</button>
-
-
-
-
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button id="editContact" type="submit"
-						class="saveContact btn btn-primary" data-id="">Save</button>
+					<button id="btnAddOrUpdate" type="submit"
+						class="saveContact btn btn-primary" data-id="">OK</button>
 				</div>
 			</div>
 		</form>
@@ -145,8 +140,8 @@
 						</tr>
 					</thead>
 
-					<tbody>
-						<c:forEach var="item" items="${List}">
+					<tbody class="Pro_body">
+						<%-- <c:forEach var="item" items="${List}">
 							<tr class="table-info">
 								<td>${item.name}</td>
 								<td>${item.price}</td>
@@ -172,7 +167,7 @@
 									class="btn btn-danger btn-circle btn-sm"> <i
 										class="fas fa-trash"></i></a></td>
 							</tr>
-						</c:forEach>
+						</c:forEach> --%>
 					</tbody>
 				</table>
 			</div>
@@ -183,25 +178,23 @@
 
 
 <script>
+
+var titlePage = $('#myModalLabel');
 	$(document).ready(function() {
-		$('#dataTable').DataTable()
+		LoadTable();
+		$('#dataTable').DataTable();
+		
+		
+		//khi close modal thì clear fiel của modal
+		$('#addOrEditModal').on('hidden.bs.modal', function () {
+			//c1 $(this).find("input,textarea,select").val('').end();
+		    $(this).find('form')[0].reset();
+		});
 	});
 	
 		
 	$( "#btnNewPro" ).click(function() {
-		var ii=$('#addOrEditModal #name').text();
-		if ($('#addOrEditModal #name').text()!=" ") {
-			
-			
-			
-			
-			$('#addOrEditModal #xxx').val("cccccc");
-			$('#xxx').val("cccccc");
-		
-		
-		}else{
-			$('.modal-header #myModalLabel').val("Cập nhật sản phẩm xx");
-		}
+		titlePage.text("THêm mới sản phẩm ");
 		$('#addOrEditModal').modal("show");
 	});
 	
@@ -216,13 +209,17 @@
             	console.log(pro);
             	
             	$('#addOrEditModal #id_category').val(pro.id_category);
+            	$('#addOrEditModal #ProId').val(pro.id);
             	$('#addOrEditModal #name').val(pro.name);
             	$('#addOrEditModal #price').val(pro.price);
             	$('#addOrEditModal #sale').val(pro.sale);
             	$('#addOrEditModal #quantity').val(pro.quantity);
             	$('#addOrEditModal #img').val(pro.img);
             	$('#addOrEditModal #description').val(pro.description);
-            	$('#myModalLabel').val("Cập nhật sản phẩm xx");
+            	
+            	
+            	
+            	titlePage.text("Cập nhật sản phẩm ");
             	
             	$('#addOrEditModal').modal("show");
             },
@@ -231,9 +228,8 @@
             }
         });
 		
-		
-		
 	};
+	
 	$('#btnAddOrUpdate').click(function (e) {
 		e.preventDefault(); //huy bo su kien mac dinh cua trang 
 	   
@@ -248,7 +244,8 @@
 	
 	
 	
-	var titlePage = $('#title').text();
+	
+	
 	function addOrEdit(data) {
 		$.ajax({
             url: '${ProAPI}',
@@ -258,6 +255,11 @@
             dataType: 'json',
             success: function (result) {
             	Swalalert(result);
+            	if (result==true) {
+            		$('#addOrEditModal').modal('hide');
+            		LoadTable();
+            		// chuyen huong window.location.href = "http://localhost:8080/quan-tri/nguoi-dung/danh-sach";
+        		}
             },
             error: function (error) {
             	Swalalert(error);
@@ -265,12 +267,72 @@
         });
 	}
 	
+	function parseJsonDate( jsonDate) { //1293034567877
+		 return (new Date(jsonDate).toISOString().substr(0,10));   //2015-10-26T07:46:36.611Z  (substr(0,10) =>2015-10-26)
+    }; 
+       
+	
+	function LoadTable(){
+		$.ajax({
+            url: '${ProAPI}',
+            type: 'GET',
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (result) 
+            {
+            		var rows = '';
+            		var rows2 = '';
+            		var date= '';
+            		 $.each(result, function (idex, item) 
+            		{
+            			   if (item.createdDate != null) {
+                			 date=parseJsonDate(item.createdDate);
+                         	} 
+            			 
+            			  rows+=`<tr class="table-info">
+								<td>` + item.name + `</td>
+								<td>` + item.price + `</td>
+								<td>` +item.sale+ `</td>
+								<td>` +item.id_category+ `</td>
+								<td>` +item.quantity+ `</td>
+								<td>` +item.stt+ `</td>
+								<td>` +item.img+ `</td>
+								<td>` +item.img+ `</td>
+								<td>`+ date+ `</td>
+								<td>` +item.modifiedDate+ `</td>
+								<td>` +item.createdBy+ `</td>
+								<td>` +item.modifiedBy+ `</td>
+								<td>` +item.description+ `</td>
+								<td><a
+									href="/quan-tri/san-pham/them-hoac-sua?Id=`+item.id+`"
+									class="btn btn-warning btn-circle btn-sm"> <i
+										class="fas fa-edit"></i></a>
+										</td>
+								<td><a onclick="showModal(`+item.id+`)"
+									class="btn btn-warning btn-circle btn-sm"> <i
+										class="fas fa-edit"></i></a></td>
+								<td><a href="/quan-tri/san-pham/xoa-san-pham?Id=`+item.id+`"
+									class="btn btn-danger btn-circle btn-sm"> <i
+										class="fas fa-trash"></i></a></td>
+							</tr>`;
+							 
+            			 $(".Pro_body").html(rows);
+            		 })
+            },
+            error: function (error) {
+            	Swalalert(error);
+            }
+        });
+		
+		
+	}
+	
 	function Swalalert(result) {
 		if (result==true) {
 			Swal.fire({
 				  position: 'top',
 				  icon: 'success',
-				  title: titlePage+' thành công ',
+				  title: titlePage.text()+' thành công ',
 				  showConfirmButton: false,
 				  timer: 1500
 				});
@@ -281,7 +343,7 @@
 			Swal.fire({
 				  position: 'top',
 				  icon: 'error',
-				  title: titlePage+' không thành công',
+				  title: titlePage.text()+' không thành công',
 				  showConfirmButton: false,
 				  timer: 1500
 				});

@@ -54,13 +54,13 @@ console.log(${alert});
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" name="username"
-                                            placeholder="User Name" required="true">
+                                            placeholder="User Name" required>
                                             
                                          <%-- <form:input  path="username" />  --%>  
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" name="password"
-                                            placeholder="Password"required="true">
+                                            placeholder="Password" required>
                                            <%--  <form:input  path="password" />   --%>
                                     </div>
                                 </div>
@@ -80,12 +80,12 @@ console.log(${alert});
                                 
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" name="fullname"
-                                        placeholder="fullname"required="true">
+                                        placeholder="fullname"required>
                                       <%--   <form:input  path="fullname" />   --%>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" name="address"
-                                        placeholder="address"required="true">
+                                        placeholder="address"required>
                                        <%--  <form:input  path="address" /> --%>  
                                 </div>
                                 <input class="btn btn-primary btn-user btn-block" type="submit" value="Register Account"/>
