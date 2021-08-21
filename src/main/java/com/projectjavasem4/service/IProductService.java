@@ -10,6 +10,8 @@ public interface IProductService {
 	List<ProductDTO> getAll();
 	int getTotalItem();
 	ProductDTO findById(long id);
+	ProductDTO findByName(String name);
+	ProductDTO findBySlug(String slug);
 	boolean save(ProductDTO dto);
 	void delete(long[] ids);
 	void deleteById(long id);

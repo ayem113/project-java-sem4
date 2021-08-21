@@ -8,4 +8,5 @@ import com.projectjavasem4.entities.BaseEntity;
 public interface GenericRepository<T extends BaseEntity> extends JpaRepository<T, Long> {
 	
 	
+	
 }

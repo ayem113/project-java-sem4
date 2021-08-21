@@ -25,6 +25,9 @@ public class ProductEntity extends BaseEntity {
 	//@JsonIgnore
 	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "slug")
+	private String slug;
 
 	@Column(name = "sale")
 	private Byte sale;

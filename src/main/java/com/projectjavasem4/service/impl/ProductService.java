@@ -1,7 +1,11 @@
 package com.projectjavasem4.service.impl;
 
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.regex.Pattern;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
@@ -9,18 +13,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.github.slugify.Slugify;
 import com.projectjavasem4.dto.ProductDTO;
 import com.projectjavasem4.entities.CategoryEntity;
 import com.projectjavasem4.entities.ProductEntity;
 import com.projectjavasem4.repository.CategoryRepository;
 import com.projectjavasem4.repository.GenericRepository;
+import com.projectjavasem4.repository.ProductRepository;
 import com.projectjavasem4.service.IProductService;
 
 @Service
 public class ProductService implements IProductService {
 
 	@Autowired
-	private GenericRepository<ProductEntity> proRep;
+	private GenericRepository<ProductEntity> genProRep;
+	@Autowired
+	private ProductRepository proRep;
 	@Autowired
 	private CategoryRepository CatRep;
 
@@ -59,14 +67,26 @@ public class ProductService implements IProductService {
 
 		// proRep.getOne(id);
 	}
+	
+	
+	
+	
+	  
 
 	@Override
 	public boolean save(ProductDTO dto) {
 
 		try {
 			CategoryEntity c = CatRep.findOne(dto.getId_category()); 
+			
 			  ProductEntity p = new ProductEntity(); 
 			  p.setCategory(c);
+			  
+			  String slug=new Slugify().slugify(dto.getName());
+			  
+			  
+			  
+			  dto.setSlug(slug);
 			  
 			  BeanUtils.copyProperties(dto, p);
 			  proRep.save(p);
@@ -126,6 +146,18 @@ public class ProductService implements IProductService {
 	public void deleteById(long id) {
 		proRep.delete(id);
 
+	}
+
+	@Override
+	public ProductDTO findByName(String name) {
+		// TODO Auto-generated method stub
+		return new ModelMapper().map(proRep.findByName(name), ProductDTO.class) ;
+	}
+
+	@Override
+	public ProductDTO findBySlug(String slug) {
+		// TODO Auto-generated method stub
+		 return new ModelMapper().map(proRep.findBySlug(slug), ProductDTO.class) ;
 	}
 
 }

@@ -88,9 +88,9 @@ public class JPAConfig {
 
 		//properties.setProperty("hibernate.hbm2ddl.auto", "create");
 		
-		 //properties.setProperty("hibernate.hbm2ddl.auto", "update");
+		 properties.setProperty("hibernate.hbm2ddl.auto", "update");
 		// //org.hibernate.dialect.MySQL5Dialect
-		 properties.setProperty("hibernate.hbm2ddl.auto", "none");
+		 //properties.setProperty("hibernate.hbm2ddl.auto", "none");
 		// //org.hibernate.dialect.H2Dialect
 		// khi chuyển qua sql server phaiar thêm dòng này ->>
 		// properties.setProperty("hibernate.dialect",

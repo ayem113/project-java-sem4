@@ -8,6 +8,7 @@ public class ProductDTO extends AbstractDTO<ProductDTO> {
 	
 
 	private String name;
+	private String slug;
 	
 	private Byte sale;
 
