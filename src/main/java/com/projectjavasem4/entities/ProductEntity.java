@@ -31,9 +31,12 @@ public class ProductEntity extends BaseEntity {
 
 	@Column(name = "sale")
 	private Byte sale;
+	
+	@Column(name = "discount")
+	private Integer discount;
 
 	@Column(name = "price")
-	private Float price;
+	private Double price;
 
 	@Column(name = "quantity")
 	private Integer quantity;

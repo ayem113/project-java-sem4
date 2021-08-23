@@ -18,9 +18,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.slugify.Slugify;
@@ -177,36 +179,16 @@ public class HomeController {
 		}
 
 	}
+	
+	
 
-	@RequestMapping(value = "/san-pham", method = RequestMethod.GET)
-	public ModelAndView detailPro(HttpServletRequest request, @RequestParam("name") String name) {
-
-		String requestURI = request.getRequestURI();
-		String requestURI2 = request.getContextPath();
-		String requestURI3 = request.getLocalAddr();
-		String request4URI = request.getLocalName();
-		String reque5stURI = request.getPathInfo();
-		String req5uestURI = request.getServletPath();
-
-		String req5uestUddRI = request.getQueryString();
-
-		String kq = requestURI.substring(23);
-		ProductDTO productDetail = new ProductDTO();
-		productDetail = iPro.findBySlug(name);
-		ModelAndView mav = new ModelAndView("web/productDetail");
-		mav.addObject("productDetail", productDetail);
-		return mav;
-	}
+	
 
 	@RequestMapping(value = "/san-pham/*", method = RequestMethod.GET)
 	public ModelAndView detailPro2(HttpServletRequest request) {
 		ProductDTO productDetail = new ProductDTO();
 
-		String requestURI = request.getRequestURI();
-		String requestURI2 = request.getContextPath();
-		String requestURI3 = request.getLocalAddr();
-		String request4URI = request.getLocalName();
-		String reque5stURI = request.getPathInfo();
+		
 		String req5uestURI = request.getServletPath();
 		String name = req5uestURI.substring(10);
 

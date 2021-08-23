@@ -2,6 +2,8 @@
 <%@include file="/common/taglib.jsp"%>
 <%@ page import="com.projectjavasem4.util.SecurityUtils"%>
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+
+<c:set var="cart" value="${sessionScope['scopedTarget.cartService']}"/>
 	
 
 	
@@ -144,7 +146,7 @@
 								<div class="shopcart-dropdown block-cart-link"
 									data-furgan="furgan-dropdown">
 									<a class="block-link link-dropdown" href="cart.html"> <span
-										class="flaticon-cart"></span> <span class="count">3</span>
+										class="flaticon-cart"></span> <span id="cart-total-items" class="count">  ${cart.totalItems}</span>
 									</a>
 								</div>
 								<div class="widget furgan widget_shopping_cart">
@@ -159,7 +161,7 @@
 													– Pink&nbsp;
 											</a> <span class="quantity">1 × <span
 													class="furgan-Price-amount amount"><span
-														class="furgan-Price-currencySymbol">$</span>150.00</span></span></li>
+														class="furgan-Price-currencySymbol">VND</span>  </span></span></li>
 											<li class="furgan-mini-cart-item mini_cart_item"><a
 												href="#" class="remove remove_from_cart_button">×</a> <a
 												href="#"> <img src="assets/images/apro1113-600x778.jpg"
@@ -179,12 +181,12 @@
 														class="furgan-Price-currencySymbol">$</span>139.00</span></span></li>
 										</ul>
 										<p class="furgan-mini-cart__total total">
-											<strong>Subtotal:</strong> <span
+											<strong>Subtotal:</strong> <span id="cart-total-price"
 												class="furgan-Price-amount amount"><span
-												class="furgan-Price-currencySymbol">$</span>418.00</span>
+												class="furgan-Price-currencySymbol">VND</span> <f:formatNumber value="${cart.totalPrice}" pattern="#,###.00	" ></f:formatNumber>    </span>
 										</p>
 										<p class="furgan-mini-cart__buttons buttons">
-											<a href="cart.html" class="button furgan-forward">Viewcart</a>
+											<a href="/gio-hang/danh-sach" class="button furgan-forward">Xem giỏ hàng</a>
 											<a href="checkout.html"
 												class="button checkout furgan-forward">Checkout</a>
 										</p>
@@ -317,8 +319,8 @@
 						class="block-minicart block-dreaming furgan-mini-cart furgan-dropdown">
 						<div class="shopcart-dropdown block-cart-link"
 							data-furgan="furgan-dropdown">
-							<a class="block-link link-dropdown" href="cart.html"> <span
-								class="flaticon-cart"></span> <span class="count">3</span>
+							<a class="shopping-cart block-link link-dropdown" href="cart.html"> <span
+								class="flaticon-cart   "></span> <span class="count">3</span>
 							</a>
 						</div>
 						<div class="widget furgan widget_shopping_cart">
@@ -367,3 +369,56 @@
 		</div>
 	</div>
 </header>
+
+<div class="slide-home-03">
+			<div
+				class="response-product product-list-owl owl-slick equal-container better-height"
+				data-slick="{&quot;arrows&quot;:false,&quot;slidesMargin&quot;:0,&quot;dots&quot;:true,&quot;infinite&quot;:false,&quot;speed&quot;:300,&quot;slidesToShow&quot;:1,&quot;rows&quot;:1}"
+				data-responsive="[{&quot;breakpoint&quot;:480,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesMargin&quot;:&quot;0&quot;}},{&quot;breakpoint&quot;:768,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesMargin&quot;:&quot;0&quot;}},{&quot;breakpoint&quot;:992,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesMargin&quot;:&quot;0&quot;}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesMargin&quot;:&quot;0&quot;}},{&quot;breakpoint&quot;:1500,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesMargin&quot;:&quot;0&quot;}}]">
+				<div class="slide-wrap">
+					<img src="/template/web/assets/images/slide31.jpg" alt="image">
+					<div class="slide-info">
+						<div class="container">
+							<div class="slide-inner">
+								<h1>SUMMER</h1>
+								<h5>Hot Trending</h5>
+								<h2>
+									<span>Plastic Chair </span>Collection
+								</h2>
+								<a href="#">Shop now</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="slide-wrap">
+					<img src="/template/web/assets/images/slide32.jpg" alt="image">
+					<div class="slide-info">
+						<div class="container">
+							<div class="slide-inner">
+								<h1>SPRING</h1>
+								<h5>New Arrivals</h5>
+								<h2>
+									<span>Salon Set</span> Collection
+								</h2>
+								<a href="#">Shop now</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="slide-wrap">
+					<img src="/template/web/assets/images/slide33.jpg" alt="image">
+					<div class="slide-info">
+						<div class="container">
+							<div class="slide-inner">
+								<h1>SUMMER</h1>
+								<h5>Collection-2020</h5>
+								<h2>
+									<span>Armchair</span> For Your Relax
+								</h2>
+								<a href="#">Shop now</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
