@@ -1,14 +1,27 @@
 package com.projectjavasem4.controller.web;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.OutputStream;
 import java.security.NoSuchAlgorithmException;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +30,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,23 +42,31 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.slugify.Slugify;
 import com.projectjavasem4.dto.ProductDTO;
+import com.projectjavasem4.entities.ProductEntity;
 import com.projectjavasem4.entities.UserEntity;
 import com.projectjavasem4.service.IProductService;
 import com.projectjavasem4.service.IRoleService;
 import com.projectjavasem4.service.IUserService2;
+import com.projectjavasem4.service.WishlistService;
+import com.projectjavasem4.util.CaptchaUtil;
 import com.projectjavasem4.util.SecurityUtils;
+
+
+
 
 @Controller(value = "homeControllerOfWeb")
 
 public class HomeController {
-
+	private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
+	public static final String FILE_TYPE = "jpeg";
 	@Autowired
 	IRoleService rr;
 	@Autowired
 	IUserService2 IUserService2;
 	@Autowired
 	IProductService iPro;
-
+	@Autowired 
+	WishlistService wishlistService;
 	public boolean isLogin() {
 
 		return SecurityUtils.getPermission().size() > 1;
@@ -147,6 +170,112 @@ public class HomeController {
 
 		return new ModelAndView("web/checkout");
 	}
+	@RequestMapping(value = "/test-capcha", method = RequestMethod.GET)
+	public ModelAndView tesstCapcha(Model model,HttpServletRequest request, HttpServletResponse response) {
+		UserEntity login= new UserEntity();
+		model.addAttribute("login", login);
+		return new ModelAndView("web/capcha");
+	}
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/xxcapcha", method = RequestMethod.GET)
+	public void xxx(HttpServletRequest request, HttpServletResponse response) {
+		
+		response.setHeader("Cache-Control", "no-cache");
+		response.setDateHeader("Expires", 0);
+		response.setHeader("Pragma", "no-cache");
+		response.setDateHeader("Max-Age", 0);
+		response.setContentType("image/jpeg");
+
+		String captchaStr="";
+
+		System.out.println("------------------In captcha---------------");
+
+		captchaStr = CaptchaUtil.generateCaptchaTextMethod2(6);
+
+
+		try {
+			int width=100;     	
+			int height=40;
+
+			Color bg = new Color(0,255,255);
+			Color fg = new Color(0,100,0);
+
+			Font font = new Font("Arial", Font.BOLD, 20);
+			BufferedImage cpimg =new BufferedImage(width,height,BufferedImage.OPAQUE);
+			Graphics g = cpimg.createGraphics();
+
+			g.setFont(font);
+			g.setColor(bg);
+			g.fillRect(0, 0, width, height);
+			g.setColor(fg);
+			g.drawString(captchaStr,10,25);   
+
+			HttpSession session = request.getSession(true);
+			session.setAttribute("CAPTCHA", captchaStr);
+
+			OutputStream outputStream = response.getOutputStream();
+
+			ImageIO.write(cpimg, FILE_TYPE, outputStream);
+			outputStream.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	@RequestMapping(value = "/loginCapcha", method = RequestMethod.POST)
+	public ModelAndView login(@ModelAttribute("login") UserEntity login,BindingResult result,Model model,HttpSession session) {
+		LOGGER.debug("--- In Login method ----");
+		
+		/*
+		 * if (login.getUsername() == null || login.getUsername().equals("")){
+		 * login.setCaptcha(""); mav.addObject("message", "User Id is required"); return
+		 * mav; }
+		 * 
+		 * 
+		 * if (login.getPassword() == null || login.getPassword().equals("")){
+		 * login.setCaptcha(""); mav.addObject("message", "Password is required");
+		 * return mav; }
+		 * 
+		 * if(login.getUsername().equals("test") &&
+		 * login.getPassword().equals("test123")){
+		 * System.out.println("user id and password matches"); mav.addObject("loginId",
+		 * login.getUsername()); return mav; } else{ login.setCaptcha("");
+		 * mav.addObject("message","User ID or Password Incorrect"); return mav; }
+		 */
+
+		String captcha = (String) session.getAttribute("CAPTCHA");
+		if(captcha == null || (captcha != null && !captcha.equals(login.getCaptcha()))){
+			/*
+			 * login.setCaptcha(""); mav.addObject("message", "Captcha does not match");
+			 * return mav;
+			 */
+			
+			
+			ModelAndView mm= new ModelAndView("web/capcha");
+			mm.addObject("error","Captcha false");
+			//return "account/index";
+			return mm;
+			
+		}else {
+			
+			
+			ModelAndView mm= new ModelAndView("web/capcha");
+			mm.addObject("error","Captcha ok");
+			//return "account/index";
+			return mm;
+		}
+		
+		
+		
+	}
+	
+	
 
 	@RequestMapping(value = "/dang-ky", method = RequestMethod.GET)
 	public ModelAndView Register(HttpServletRequest request) {
@@ -195,6 +324,30 @@ public class HomeController {
 		productDetail = iPro.findBySlug(name);
 
 		ModelAndView mav = new ModelAndView("web/productDetail");
+		
+		Cookie read = wishlistService.read("Wishlist");
+		
+		if (read!=null) {
+			
+			String ids = read.getValue();  // danh sahc id da luu
+			//List<ProductEntity> ls=iPro.findByIds(ids);
+			
+			String[] words = ids.split(",");
+			
+			List<String> supplierNames = Arrays.asList("158","177","65","44");
+			List<String> immutableList = List.of(words);
+			
+			
+			
+			List<String> Name1 = Arrays.asList(words);
+			
+			
+			
+			List<ProductEntity> ls4=iPro.findByidnene2(words);
+			mav.addObject("listWishlist", ls4);
+		}
+		
+		
 		mav.addObject("productDetail", productDetail);
 		return mav;
 	}

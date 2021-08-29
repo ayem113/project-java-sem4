@@ -2,6 +2,20 @@
 
 <%@include file="/common/taglib.jsp"%>
 <div class="single-thumb-vertical main-container shop-page no-sidebar">
+
+
+
+
+<c:forEach var="item" items="${listWishlist}"> 
+
+			<div> ${item.name }</div>
+			<div> ${item.price }</div>
+ 
+</c:forEach>
+
+		
+			
+
     <div class="container">
         <div class="row">
             <div class="main-content col-md-12">

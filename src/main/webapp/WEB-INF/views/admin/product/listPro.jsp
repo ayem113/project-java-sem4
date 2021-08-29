@@ -1,5 +1,3 @@
-
-  
 <%@include file="/common/taglib.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -12,7 +10,8 @@
 <div class="modal fade" id="addOrEditModal" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
-		<form class="form-horizontal" method="POST" id="formSubmit" role="form">
+		<form class="form-horizontal" method="POST" id="formSubmit"
+			role="form">
 			<div class="modal-content">
 				<div class="modal-header">
 
@@ -30,9 +29,9 @@
 
 
 					<div class="row">
-					
-						 <input type="hidden" id="ProId" name="id" >
-					
+
+						<input type="hidden" id="ProId" name="id">
+
 						<div class="col-md-5 pr-1">
 							<div class="form-group">
 								<input type="text" id="name" class="form-control" name="name"
@@ -110,7 +109,7 @@
 
 
 	<!-- DataTales Example -->
-	<div class="card shadow mb-4">
+	<div id="dataTableSum" class="card shadow mb-4">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary">Danh sách tất cả
 				sản phẩm</h6>
@@ -182,8 +181,11 @@
 var titlePage = $('#myModalLabel');
 	$(document).ready(function() {
 		LoadTable();
-		$('#dataTable').DataTable();
 		
+		//$ ('#dataTable').DataTable().ajax.url("http://localhost:8080/api/product").load ();
+		
+		//$ ('#dataTable').DataTable().ajax.url("http://localhost:8080/api/product");
+		//$ ('#dataTable').DataTable().draw();
 		
 		//khi close modal thì clear fiel của modal
 		$('#addOrEditModal').on('hidden.bs.modal', function () {
@@ -199,40 +201,24 @@ var titlePage = $('#myModalLabel');
 	});
 	
 	function showModal(id) {
-		//e.preventDefault();
-		$.ajax({
-            url: '${ProAPI}/'+id,
-            type: 'GET',
-            contentType: 'application/json',
-            dataType: 'json',
-            success: function (pro) {
-            	console.log(pro);
-            	
-            	$('#addOrEditModal #id_category').val(pro.id_category);
-            	$('#addOrEditModal #ProId').val(pro.id);
-            	$('#addOrEditModal #name').val(pro.name);
-            	$('#addOrEditModal #price').val(pro.price);
-            	$('#addOrEditModal #sale').val(pro.sale);
-            	$('#addOrEditModal #quantity').val(pro.quantity);
-            	$('#addOrEditModal #img').val(pro.img);
-            	$('#addOrEditModal #description').val(pro.description);
-            	
-            	
-            	
-            	titlePage.text("Cập nhật sản phẩm ");
-            	
-            	$('#addOrEditModal').modal("show");
-            },
-            error: function (error) {
-            	console.log(error)
-            }
-        });
 		
+		$.get('${ProAPI}/'+id, function(pro, status){
+			console.log(pro);
+        	$('#addOrEditModal #id_category').val(pro.id_category);
+        	$('#addOrEditModal #ProId').val(pro.id);
+        	$('#addOrEditModal #name').val(pro.name);
+        	$('#addOrEditModal #price').val(pro.price);
+        	$('#addOrEditModal #sale').val(pro.sale);
+        	$('#addOrEditModal #quantity').val(pro.quantity);
+        	$('#addOrEditModal #img').val(pro.img);
+        	$('#addOrEditModal #description').val(pro.description);
+        	titlePage.text("Cập nhật sản phẩm ");
+        	$('#addOrEditModal').modal("show");
+		})
 	};
 	
 	$('#btnAddOrUpdate').click(function (e) {
 		e.preventDefault(); //huy bo su kien mac dinh cua trang 
-	   
 	    var data = {};
 	    var formData = $('#formSubmit').serializeArray();
 	    $.each(formData, function (i, v) {
@@ -247,24 +233,24 @@ var titlePage = $('#myModalLabel');
 	
 	
 	function addOrEdit(data) {
-		$.ajax({
-            url: '${ProAPI}',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(data),
-            dataType: 'json',
-            success: function (result) {
-            	Swalalert(result);
-            	if (result==true) {
-            		$('#addOrEditModal').modal('hide');
-            		LoadTable();
-            		// chuyen huong window.location.href = "http://localhost:8080/quan-tri/nguoi-dung/danh-sach";
-        		}
-            },
-            error: function (error) {
-            	Swalalert(error);
-            }
-        });
+		 $.post({ url: '${ProAPI}', data: JSON.stringify(data), contentType: 'application/json; charset=utf-8'}).done(function (response) 
+			{
+				Swalalert(true);
+	    		$('#addOrEditModal').modal('hide');
+	    		
+
+	    		
+	    		var mytbl = $("#dataTable").DataTable();
+	    		mytbl.clear();
+	    		mytbl.ajax.reload;
+	    		  
+	    		 //$("#dataTable").DataTable().ajax.reload(null, false);
+				//LoadTable();
+	    		//$( "#dataTableSum" ).load(window.location.href + " #dataTableSum" );
+	    		//location.reload();
+	    		
+	    		//$("#dataTable").load("http://localhost:8080/quan-tri/san-pham/danh-sach" + " #dataTable");
+   			 });
 	}
 	
 	function parseJsonDate( jsonDate) { //1293034567877
@@ -273,62 +259,47 @@ var titlePage = $('#myModalLabel');
        
 	
 	function LoadTable(){
-		$.ajax({
-            url: '${ProAPI}',
-            type: 'GET',
-            contentType: 'application/json',
-            dataType: 'json',
-            success: function (result) 
-            {
-            		var rows = '';
-            		var rows2 = '';
-            		var date= '';
-            		 $.each(result, function (idex, item) 
-            		{
-            			   if (item.createdDate != null) {
-                			 date=parseJsonDate(item.createdDate);
-                         	} 
-            			 
-            			  rows+=`<tr class="table-info">
-								<td>` + item.name + `</td>
-								<td>` + item.price + `</td>
-								<td>` +item.sale+ `</td>
-								<td>` +item.id_category+ `</td>
-								<td>` +item.quantity+ `</td>
-								<td>` +item.stt+ `</td>
-								<td>` +item.img+ `</td>
-								<td>` +item.img+ `</td>
-								<td>`+ date+ `</td>
-								<td>` +item.modifiedDate+ `</td>
-								<td>` +item.createdBy+ `</td>
-								<td>` +item.modifiedBy+ `</td>
-								<td>` +item.description+ `</td>
-								<td><a
-									href="/quan-tri/san-pham/them-hoac-sua?Id=`+item.id+`"
-									class="btn btn-warning btn-circle btn-sm"> <i
-										class="fas fa-edit"></i></a>
-										</td>
-								<td><a onclick="showModal(`+item.id+`)"
-									class="btn btn-warning btn-circle btn-sm"> <i
-										class="fas fa-edit"></i></a></td>
-								<td><a href="/quan-tri/san-pham/xoa-san-pham?Id=`+item.id+`"
-									class="btn btn-danger btn-circle btn-sm"> <i
-										class="fas fa-trash"></i></a></td>
-							</tr>`;
-							 
-            			 $(".Pro_body").html(rows);
-            		 })
-            },
-            error: function (error) {
-            	Swalalert(error);
-            }
-        });
 		
-		
+		 $.get('${ProAPI}', function(result, status){
+			 var rows = '';
+     		var rows2 = '';
+     		var date= '';
+     		 $.each(result, function (idex, item) {
+     			 
+     			  if (item.createdDate != null) { date=parseJsonDate(item.createdDate);} 
+     			 
+     			  rows+=`<tr class="table-info">
+							<td>` + item.name + `</td>
+							<td>` + item.price + `</td>
+							<td>` +item.sale+ `</td>
+							<td>` +item.id_category+ `</td>
+							<td>` +item.quantity+ `</td>
+							<td>` +item.stt+ `</td>
+							<td>` +item.img+ `</td>
+							<td>` +item.img+ `</td>
+							<td>`+ date+ `</td>
+							<td>` +item.modifiedDate+ `</td>
+							<td>` +item.createdBy+ `</td>
+							<td>` +item.modifiedBy+ `</td>
+							<td>` +item.description+ `</td>
+							<td><a href="/quan-tri/san-pham/them-hoac-sua?Id=`+item.id+`"
+								class="btn btn-warning btn-circle btn-sm"> <i class="fas fa-edit"></i></a></td>
+							<td><a onclick="showModal(`+item.id+`)"
+								class="btn btn-warning btn-circle btn-sm"> <i class="fas fa-edit"></i></a></td>
+							<td><a href="/quan-tri/san-pham/xoa-san-pham?Id=`+item.id+`"
+								class="btn btn-danger btn-circle btn-sm"> <i class="fas fa-trash"></i></a></td>
+						</tr>`;
+						 
+     			 $(".Pro_body").html(rows);
+     		 })
+     		 
+     		$('#dataTable').DataTable();
+     		 
+		    }); 
 	}
 	
 	function Swalalert(result) {
-		if (result==true) {
+		if (result==true || result=='true') {
 			Swal.fire({
 				  position: 'top',
 				  icon: 'success',
@@ -336,8 +307,6 @@ var titlePage = $('#myModalLabel');
 				  showConfirmButton: false,
 				  timer: 1500
 				});
-				
-			
 		}
 		else{
 			Swal.fire({
@@ -349,7 +318,6 @@ var titlePage = $('#myModalLabel');
 				});
 				
 			}
-		
 	}
 	
 </script>

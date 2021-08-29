@@ -32,7 +32,7 @@ public class WishlistController {
 			
 			if (!value.contains(idReq)) {//kiểm tra value của nó xem đã tồn tại chưa
 				
-				value+="" + idReq; //nếu tồn tại thì cộng đồn vô 
+				value+=","+ idReq; //nếu tồn tại thì cộng đồn vô 
 			
 			}
 			else {

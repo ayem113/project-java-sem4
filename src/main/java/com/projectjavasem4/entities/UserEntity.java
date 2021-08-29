@@ -19,6 +19,10 @@ import lombok.Data;
 @Data
 public class UserEntity extends BaseEntity {
 
+	
+	@Column(name = "captcha")
+	private String captcha;
+	
 	@Column(name = "username")
 	private String username;
 

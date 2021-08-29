@@ -31,7 +31,6 @@
 								<thead>
 									<tr>
 										<th class="product-remove">Xoa</th>
-										<th class="product-remove">ID</th>
 										<th class="product-thumbnail">Anh</th>
 										<th class="product-name">Product</th>
 										<th class="product-price">Price</th>
@@ -52,9 +51,6 @@
 												aria-label="Remove this item" data-product_id="27"
 												data-id="${p.id}">×</a></td>
 												
-											<td class="product-remove"><a href="#" class="remove"
-												aria-label="Remove this item" data-product_id="27"
-												data-id="${p.id}">${p.id}</a></td>
 											<td class="product-thumbnail"><a href="#"><img
 													src="assets/images/apro134-1-600x778.jpg"
 													class="attachment-furgan_thumbnail size-furgan_thumbnail"
@@ -69,30 +65,24 @@
 												class="furgan-Price-amount amount"><span
 													class="furgan-Price-currencySymbol">%</span>${p.discount}</span></td>
 											
-											<td class="product-quantity" data-title="Quantity">
-												<div class="quantity">
+											<td class="" data-title="Quantity">
+												<div class="">
 													<span class="qty-label">Quantiy:</span>
 													<div class="">
-														<input type="number" min=1 value="${p.quantity}" title="Qty"> 
+														<input data-id="${p.id}" data-price="${p.price}"  data-discount="${p.discount}" class="inputQuantity"  type="number" min=1 value="${p.quantity}" title="Qty"> 
 													</div>
 												</div>
 											</td>
-											<td class="product-subtotal" data-title="Total"><span
-												class="furgan-Price-amount amount"><span
-													class="furgan-Price-currencySymbol"></span> ${(p.price * p.quantity * ((100 - p.discount))) / 100} </span></td>
+											<td class="product-subtotal" data-title="Total">
+											<span 
+												class="furgan-Price-amount amount   span-singer-price">
+												<span class="furgan-Price-currencySymbol"></span> 
+												${(p.price * p.quantity * ((100 - p.discount))) / 100}
+											 </span>
+											 </td>
 										</tr>
-
-
-
-
 									</c:forEach>
 									
-									
-									
-									
-									
- 									
- 									
  									
  									<tr>
                                     <td colspan="12" class="actions">
@@ -101,7 +91,7 @@
                                         	
                                             <label for="Tổng tiền là">Tổng tiền là:</label> 
                                             <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="Tổng tiền toàn bộ giỏ hàng của bạn là :">
-                                            <button type="submit" class="button btn btn-warning" name="apply_coupon" value="Apply coupon">${sessionScope['scopedTarget.cartService'].totalPrice}</button>
+                                            <button  type="submit" class="  btn-totalPrice button btn btn-warning" name="apply_coupon" value="Apply coupon">${sessionScope['scopedTarget.cartService'].totalPrice}</button>
                                         </div>
                                       <button type="submit" class="button btn btn-info btnClear" name="update_cart" value="Update cart" >Làm trống giỏ hàng
                                         </button>
@@ -111,12 +101,7 @@
                                		 </tr>
 								</tbody>
 							</table>
-							
-		
-							<input type="number" min=1 value="${p.quantity}" title="Qty"> 
-							
 						</form>
-
 						<div class="col-md-12 col-sm-12 dreaming_crosssell-product">
 							<div class="block-title">
 								<h2 class="product-grid-title">
@@ -294,40 +279,72 @@
 
 <script type="text/javascript">
 
+$(".inputQuantity").on("input", function(e) {
+	   e.preventDefault();
+	   var _this = this;
+		var quantity =$(this).val();
+		var id =($(this).attr("data-id"));
+		var price =($(this).attr("data-price"));
+		var discount =($(this).attr("data-discount"));
+	
+		
+		/* $(this).parents('.furgan-cart-form__cart-item cart_item').find(".span-singer-price").html("cc");
+		
+		console.log($(this).parents('.furgan-cart-form__cart-item').children(".furgan-Price-amount.amount.span-singer-price"));
+		console.log(quantity);
+		$(this).closest("tr").find("td.span.span-singer-price").html(quantity*price* ((100 - discount) / 100));
+    	
+    	$(this).find(".span-singer-price").html(quantity*price* ((100 - discount) / 100)); */
+    	
+		
+		//$(this).parents('tr').find("span.span-singer-price").html(quantity*price* ((100 - discount) / 100));
+	    $.get("/cart/update/"+id+"/"+quantity, function(data, status){
+	    	console.log(this);
+	    		
+	    	$(_this).parents('tr').find("span.span-singer-price").html(quantity*price* ((100 - discount) / 100));
+	    	
+	    	
+	    	
+	    	$(".btn-totalPrice").text(data[1]);
+	      });
+	   
+	});
+
 $('.btnClear').click(function (e) {
 	e.preventDefault(); 
-    
 	var id =($(this).attr("data-id"));
-   	
     $.get("/cart/clear/", function(data, status){
     	 	$("#cart-total-items").html(0);
     	    $("#cart-total-price").html(0);
     	    $("table>tbody ").html("");
-    	    
-    	    
       });
-	
 });
 
 $('.btnRemove').click(function (e) {
 	e.preventDefault(); 
-    
 	var id =($(this).attr("data-id"));
-   	
     $.get("/cart/remove/"+id, function(data, status){
     	$("#cart-total-items").html(data[0]);
 	    $("#cart-total-price").html(data[1]);
-	    
 	    //load lai table c1
 	   // $(".ProTabale").load("http://localhost:8080/gio-hang/danh-sach" + " .ProTabale");
-	    
-	    
-	    
-    	    
       });
     //load table cach 2 
       $(this).closest("tr").remove();
-	
+});
+
+
+$('.btnRemove').click(function (e) {
+	e.preventDefault(); 
+	var id =($(this).attr("data-id"));
+    $.get("/cart/remove/"+id, function(data, status){
+    	$("#cart-total-items").html(data[0]);
+	    $("#cart-total-price").html(data[1]);
+	    //load lai table c1
+	   // $(".ProTabale").load("http://localhost:8080/gio-hang/danh-sach" + " .ProTabale");
+      });
+    //load table cach 2 
+      $(this).closest("tr").remove();
 });
 
 </script>

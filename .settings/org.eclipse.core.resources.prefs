@@ -10,6 +10,7 @@ encoding//src/main/webapp/WEB-INF/views/admin/product/addOrEdit.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/product/listPro.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/user/listUser.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/login.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/register.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/web/checkout.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/web/home.jsp=UTF-8
 encoding//src/main/webapp/common/admin/sidebar.jsp=UTF-8

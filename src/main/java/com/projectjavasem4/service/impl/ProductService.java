@@ -160,4 +160,37 @@ public class ProductService implements IProductService {
 		 return new ModelMapper().map(proRep.findBySlug(slug), ProductDTO.class) ;
 	}
 
+	@Override
+	public List<ProductEntity> findByIds(String ids) {
+
+		return null;
+		/*
+		 * List<ProductEntity> findByIds = proRep.findByIdIn(ids); return findByIds;
+		 */
+	}
+
+	@Override
+	public List<ProductEntity> findByIdsListString(List<String> ids) {
+		/*
+		 * List<ProductEntity> findByIds = proRep.findByIdIn(ids); return findByIds;
+		 */
+		return null;
+	}
+
+	@Override
+	public List<ProductEntity> findByidnene(List<String> name) {
+		 return proRep.findUserByids2(name); 
+		 
+	}
+
+	@Override
+	public List<ProductEntity> findByNames(List<String> names) {
+		  return	proRep.findByNames(names);
+	}
+
+	@Override
+	public List<ProductEntity> findByidnene2(String[] names) {
+		return proRep.findUserByids22(names); 
+	}
+
 }
