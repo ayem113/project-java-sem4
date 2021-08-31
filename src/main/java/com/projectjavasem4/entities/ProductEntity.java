@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -43,7 +46,12 @@ public class ProductEntity extends BaseEntity {
 
 	@Column(name = "img", columnDefinition = "TEXT")
 	private String img;
+	
 
+	
+	
+	
+	
 	@Column(name = "list_img", columnDefinition = "TEXT")
 	private String list_img;
 

@@ -1,5 +1,6 @@
 package com.projectjavasem4.service.impl;
 
+import java.io.File;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
 import java.util.ArrayList;
@@ -7,11 +8,15 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
+import javax.servlet.ServletContext;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.github.slugify.Slugify;
 import com.projectjavasem4.dto.ProductDTO;
@@ -77,6 +82,9 @@ public class ProductService implements IProductService {
 	public boolean save(ProductDTO dto) {
 
 		try {
+			
+			
+			
 			CategoryEntity c = CatRep.findOne(dto.getId_category()); 
 			
 			  ProductEntity p = new ProductEntity(); 
@@ -87,6 +95,12 @@ public class ProductService implements IProductService {
 			  
 			  
 			  dto.setSlug(slug);
+			
+				/*
+				 * CommonsMultipartFile myFile=dto.getFileUpload();
+				 * p.setImg(myFile.getOriginalFilename());
+				 */
+			  
 			  
 			  BeanUtils.copyProperties(dto, p);
 			  proRep.save(p);

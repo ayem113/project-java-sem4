@@ -1,5 +1,8 @@
 package com.projectjavasem4.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -17,6 +20,10 @@ public class ProductDTO extends AbstractDTO<ProductDTO> {
 	private Integer quantity;
 
 	private String img;
+	
+	private CommonsMultipartFile fileUpload;
+	
+	private MultipartFile fileUpload2;
 
 	private String list_img;
 

@@ -7,30 +7,13 @@
 <c:url var="ProAPI" value="/api/product" />
 
 
-<div class="modal fade" id="addOrEditModal" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document">
-		<form class="form-horizontal" method="POST" id="formSubmit"
-			role="form">
-			<div class="modal-content">
-				<div class="modal-header">
 
 
-					<h4 class="modal-title" id="myModalLabel">Thêm mới sản phẩm</h4>
-
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-
-				</div>
-				<div class="modal-body">
-
-
-
-					<div class="row">
-
-						<input type="hidden" id="ProId" name="id">
+<form id="file-upload-form">
+    <label for="file-upload-input">Select file to upload</label>
+    <input type="file" id="file-upload-input" name="file">
+    
+    <input type="hidden" id="ProId" name="id">
 
 						<div class="col-md-5 pr-1">
 							<div class="form-group">
@@ -38,6 +21,15 @@
 									placeholder="Tên sản phẩm" />
 							</div>
 						</div>
+						
+						
+						<div class="col-md-5 pr-1">
+							<div class="form-group">
+								<input  multiple   name="fileUpload" id="fileToUpload" type="file" />
+							</div>
+						</div>
+						
+						
 						<div class="col-md-3 px-1">
 							<div class="form-group">
 								<input type="number" id="price" class="form-control"
@@ -66,8 +58,91 @@
 						</div>
 						<div class="col-md-4 pl-1">
 							<div class="form-group">
-								<input type="text" id="img" class="form-control" name="img"
-									placeholder="img" />
+								<input type="text" id="imgInout" class="form-control" name="img"
+									multiple placeholder="img" multiple  />
+							</div>
+						</div>
+    
+    <button type="submit">Start Upload</button>
+</form>
+
+
+
+
+
+
+
+
+<div class="modal fade" id="addOrEditModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<form class="form-horizontal" method="POST" id="formSubmit"
+			role="form" enctype="multipart/form-data">
+			<div class="modal-content">
+				<div class="modal-header">
+
+
+					<h4 class="modal-title" id="myModalLabel">Thêm mới sản phẩm</h4>
+
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+
+				</div>
+				<div class="modal-body">
+
+
+
+					<div class="row">
+
+						<input type="hidden" id="ProId" name="id">
+
+						<div class="col-md-5 pr-1">
+							<div class="form-group">
+								<input type="text" id="name" class="form-control" name="name"
+									placeholder="Tên sản phẩm" />
+							</div>
+						</div>
+						
+						
+						<div class="col-md-5 pr-1">
+							<div class="form-group">
+								<input  multiple   name="fileUpload" id="fileToUpload" type="file" />
+							</div>
+						</div>
+						
+						
+						<div class="col-md-3 px-1">
+							<div class="form-group">
+								<input type="number" id="price" class="form-control"
+									name="price" placeholder="Giá gốc" />
+							</div>
+						</div>
+						<div class="col-md-4 pl-1">
+							<div class="form-group">
+								<input type="number" id="sale" class="form-control" name="sale"
+									placeholder="Giá sale" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 pr-1">
+							<div class="form-group">
+								<input type="text" id="id_category" class="form-control"
+									name="id_category" placeholder="CHọn danh mục" />
+							</div>
+						</div>
+						<div class="col-md-4 pr-1">
+							<div class="form-group">
+								<input type="number" id="quantity" class="form-control"
+									name="quantity" placeholder="Số lượng" />
+							</div>
+						</div>
+						<div class="col-md-4 pl-1">
+							<div class="form-group">
+								<input type="text" id="imgInout" class="form-control" name="img"
+									multiple placeholder="img" multiple  />
 							</div>
 						</div>
 					</div>
@@ -179,6 +254,8 @@
 <script>
 
 var titlePage = $('#myModalLabel');
+
+
 	$(document).ready(function() {
 		LoadTable();
 		
@@ -218,19 +295,83 @@ var titlePage = $('#myModalLabel');
 	};
 	
 	$('#btnAddOrUpdate').click(function (e) {
+		
+		
+		
+		
 		e.preventDefault(); //huy bo su kien mac dinh cua trang 
 	    var data = {};
-	    var formData = $('#formSubmit').serializeArray();
+		
+		
+	    /* var formData = $('#formSubmit').serializeArray();
+	    
+	    formData.push("file", "cc"); */
+	    
+	    //var formData = $('#formSubmit').append("file", "cc").serializeArray();
+	    //formData.append("file", gg);
+	    
+	    //console.log(formData);
+	    
+	    
+	    var myForm = document.getElementById('addOrEditModal');
+	    var formData = new FormData(formSubmit);
+	   /*  var data2 = new FormData();
+
+	    $.each($("input[type='file']")[0].files, function(i, file) {
+	    	console.log(file);
+	        data2.append('file', file);
+	    }); */
+	    
+	    console.log("data2 :::::",data2);
 	    $.each(formData, function (i, v) {
             data[""+v.name+""] = v.value;
         });
 	    var id = $('#ProId').val();
+	    
+	    
+	    console.log(formData);
+	    
+	    
 	    addOrEdit(data);
 	});
 	
+		/* document.getElementById('fileToUpload').onchange = function () {
+		  //alert('Selected file: ' + this.value);
+		  
+		  $("#imgInout").val(this.value);
+		}; */
+		
+		
+		var file = document.getElementById("fileToUpload");
+
+		file.addEventListener("change", function() {
+		    for (var i = 0; i < file.files.length; i++) {
+		        console.log(file.files[i].name);
+		    }
+		}, false);
+		
+		var gg;
+		
+		
+		 $('input[type="file"]').change(function(e) {
+			//alert($('input[type=file]').val());
+			
+			
+		
+                
+                
+                
+                
+            var geekss = e.target.files[0].name;
+            gg=geekss;
+            var filePath = $(this).val();
+            console.log(filePath);
+            $("#imgInout").val(geekss);
+
+        }); 
 	
 	
-	
+		 
 	
 	function addOrEdit(data) {
 		 $.post({ url: '${ProAPI}', data: JSON.stringify(data), contentType: 'application/json; charset=utf-8'}).done(function (response) 
@@ -297,6 +438,42 @@ var titlePage = $('#myModalLabel');
      		 
 		    }); 
 	}
+	
+	
+	
+	
+	
+	
+	$("#file-upload-form").on("submit", function (e) {
+
+        // cancel the default behavior
+        e.preventDefault();
+
+        // use $.ajax() to upload file
+        $.ajax({
+            url: "/file-upload",
+            type: "POST",
+            data: new FormData(this),
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (res) {
+                console.log(res);
+            },
+            error: function (err) {
+                console.error(err);
+            }
+        });
+    });
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	function Swalalert(result) {
 		if (result==true || result=='true') {

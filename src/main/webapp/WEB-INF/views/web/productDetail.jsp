@@ -32,8 +32,9 @@
                                     <div class="flex-viewport">
                                         <figure class="furgan-product-gallery__wrapper">
                                             <div class="furgan-product-gallery__image">
-                                                <img alt="img"
-                                                     src="assets/images/apro131-2.jpg">
+                                                <img src="<c:url value="/images"/>/${productDetail.img }"/>
+                                                
+                                                
                                             </div>
                                             <div class="furgan-product-gallery__image">
                                                 <img src="assets/images/apro134-1.jpg"
@@ -50,8 +51,7 @@
                                         </figure>
                                     </div>
                                     <ol class="flex-control-nav flex-control-thumbs">
-                                        <li><img
-                                                src="assets/images/apro131-2-100x100.jpg" alt="img">
+                                        <li><img src="<c:url value="/images"/>/${productDetail.img }"/>
                                         </li>
                                         <li><img
                                                 src="assets/images/apro134-1-100x100.jpg" alt="img">

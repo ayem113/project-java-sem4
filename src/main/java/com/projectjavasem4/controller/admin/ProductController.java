@@ -6,9 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.projectjavasem4.dto.ProductDTO;
@@ -41,6 +44,17 @@ public class ProductController {
 		mav.addObject("model", model);
 		return mav;
 	}
+	@ResponseBody
+	@RequestMapping(value = "/quan-tri/san-pham/quan-tri/san-pham/testUpload", method = RequestMethod.POST)
+	public ModelAndView editNew22(@ModelAttribute(name = "model") ProductDTO mo,  @RequestParam(value = "Id", required = false) Long id, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("admin/product/addOrEdit");
+		
+		CommonsMultipartFile fileUpload = mo.getFileUpload();
+		String a=fileUpload.getOriginalFilename();
+		return mav;
+	}
+	
+	
 	
 	
 	

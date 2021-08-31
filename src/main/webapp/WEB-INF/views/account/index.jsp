@@ -12,7 +12,7 @@
 <body>
 
 <h3 style="color:red">${filesuccess}</h3>
-<s:form method="post" action="savefile" enctype="multipart/form-data">
+<s:form method="post" action="savefile2" enctype="multipart/form-data">
 <p><label for="image">Choose Image</label></p>
 <p><input  path="file" name="file" id="fileToUpload" type="file" /></p>
 <p><input type="submit" value="Upload"></p>
